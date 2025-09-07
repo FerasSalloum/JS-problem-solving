@@ -28,43 +28,48 @@
 // nums = [3, 3], target = 6
 // المخرجات (Outputs):  
 // [0, 1]
-function findTwoSum(nums, target) {
-    let arrReslt = [],
-        numsCopy = [],
-        left = [],
+const sort = (arr) => {
+      if (arr.length <= 1) return arr; 
+    let left = [],
         right = [],
-        total = 0, first = 0, second = 1, povit = 0
-    // numsCopy = [...nums]
-    // numsCopy.sort((a, b) => a - b)
-    povit = nums[nums.length - 1]
-    for (let i = 0; i < nums.length - 1; i++) {
-        if (nums[i] < povit) { left.push(nums[i]) } else { right.push(nums[i]) }
+        povit = arr[arr.length - 1]
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < povit) { left.push(arr[i]) } else { right.push(arr[i]) }
     }
-    numsCopy = [...left, povit, ...right]
-
-    while (second < numsCopy.length) {
-        if (first >= 0 && second >= 0) {
-            arrReslt = [numsCopy[first], numsCopy[second]]
-            total = arrReslt.reduce((acc, num) => acc += num, 0)
-        }
-        if (total < target) {
-            first++
-            second++
-        } else if (total > target) {
-            first--
-        } else if (total == target) {
-            return [nums.indexOf(arrReslt[0]), nums.indexOf(arrReslt[1], nums.indexOf(arrReslt[0]) + 1)]
-        }
-    }
+    return arr = [...sort(left), povit, ...sort(right)]
 }
 // function findTwoSum(nums, target) {
-//     const map = new Map();
-//     for (let i = 0; i < nums.length; i++) {
-//         const complement = target - nums[i];
-//         if (map.has(complement)) return [map.get(complement), i];
-//         map.set(nums[i], i);
+//     let arrReslt = [],
+//         numsCopy = [],
+//         total = 0, first = 0, second = 1
+//         // numsCopy = [...nums]; numsCopy.sort((a, b) => a - b)
+//         numsCopy = sort(nums);
+//     console.log("numsCopy: ", numsCopy)
+
+//     while (second < numsCopy.length) {
+//         if (first >= 0 && second >= 0) {
+//             arrReslt = [numsCopy[first], numsCopy[second]]
+//             total = arrReslt.reduce((acc, num) => acc += num, 0)
+//         }
+//         if (total < target) {
+//             first++
+//             second++
+//         } else if (total > target) {
+//             first--
+//         } else if (total == target) {
+//             return [nums.indexOf(arrReslt[0]), nums.indexOf(arrReslt[1], nums.indexOf(arrReslt[0]) + 1)]
+//         }
 //     }
-//     return null;
 // }
-const nums = [2, 7, 11, 15], target = 9
+function findTwoSum(nums, target) {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        // console.log ([...map.values()])
+        const complement = target - nums[i];
+        if (map.has(complement)) return [map.get(complement), i];
+        map.set(nums[i], i);
+    }
+    return null;
+}
+const nums = [ 2, 11, 15,7], target = 9
 console.log(findTwoSum(nums, target))
